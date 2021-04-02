@@ -4,10 +4,10 @@ build:
   verbosity: detailed
 
 build_script:
-  - gradlew.bat assemble --info --no-daemon -PbintrayUserName -PbintrayApiKey
+  - cmd: .\gradlew.bat assemble --no-daemon
 
 test_script:
-  - gradlew.bat check --info --no-daemon -PbintrayUserName -PbintrayApiKey
+  - cmd: .\gradlew.bat check --no-daemon
 
 branches:
   only:
@@ -19,10 +19,7 @@ cache:
 
 environment:
   matrix:
-    #- JAVA_HOME: C:\Program Files\Java\jdk1.7.0
-    #- JAVA_HOME: C:\Program Files\Java\jdk1.8.0
-    #- JAVA_HOME: C:\Program Files (x86)\Java\jdk1.7.0
-    #- JAVA_HOME: C:\Program Files (x86)\Java\jdk1.8.0
+    - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
     - JAVA_HOME: C:\Program Files\Java\jdk11
 
 matrix:
