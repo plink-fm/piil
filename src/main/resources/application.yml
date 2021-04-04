@@ -3,6 +3,9 @@
 #inputItemDescriptors[0].name=ProductID
 #inputItemDescriptors[0].type=Number
 
+storeId: 1
+taxRate: 0.07775
+
 inputItemDescriptors:
   -
     start: 1

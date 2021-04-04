@@ -12,13 +12,15 @@ class USDollarCurrencyFieldTest {
 
     @Test
     void parseUSDCurrency() {
-        String result = USDollarCurrencyField.parse("00000567");
+        // TODO: refactor parse method in USDollarCurrencyField
+        String result = new USDollarCurrencyField("").parse("00000567");
         assertEquals("$5.67", result);
     }
 
     @Test
     void parseNegativeUSDCurrency() {
-        String result = USDollarCurrencyField.parse("-0000567");
+        // TODO: refactor parse method in USDollarCurrencyField
+        String result = new USDollarCurrencyField("").parse("-0000567");
         assertEquals("-$5.67", result);
     }
 }

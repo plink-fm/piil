@@ -26,7 +26,11 @@ public class ProductInfoIngestionLibraryService {
     public ProductInfoIngestionLibraryService(ConfigProperties configProperties) {
         this.configProperties = configProperties;
         inputItemDescriptors = configProperties.getInputItemDescriptors();
+
+        // TODO: read in global settings from properties file, like storeId and taxRate
+        // TODO: create an InputItemSpecification that wraps the descriptors and globals?
         inputItemReader = new InputItemReader(inputItemDescriptors);
+
         inputItemTransformer = new InputItemTransformer(inputItemDescriptors);
         productRecordWriter = new ProductRecordWriter();
     }

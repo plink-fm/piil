@@ -5,10 +5,11 @@ import java.util.Currency;
 public class USDollarCurrencyField implements CurrencyField<Currency> {
 
     private String data;
+    private Double dataNumber;
 
     //private boolean isNegative = false;
 
-    private Currency currency;
+//    private Currency currency;
 
 
     public USDollarCurrencyField(String data) {
@@ -16,16 +17,21 @@ public class USDollarCurrencyField implements CurrencyField<Currency> {
         //isNegative = data.startsWith("-");
     }
 
+//    @Override
+//    public Currency getData() {
+//        return currency;
+//    }
+
     @Override
-    public Currency getData() {
-        return currency;
+    public Double getData() {
+        return dataNumber;
     }
 
 //    public boolean isNegative() {
 //        return isNegative;
 //    }
 
-    protected static String parse(String data) {
+    protected String parse(String data) {
 
         String inData = data;
         boolean isNegative = data.startsWith("-");
@@ -40,6 +46,19 @@ public class USDollarCurrencyField implements CurrencyField<Currency> {
         if (isNegative) {
             value *= -1.0;
         }
+
+        dataNumber = value;
+
+        java.util.Currency usd = java.util.Currency.getInstance("USD");
+        java.text.NumberFormat format = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.US);
+        format.setCurrency(usd);
+//        System.out.println(format.format(value) + " " + usd.getCurrencyCode());
+        System.out.println(format.format(value));
+        return format.format(value);
+    }
+
+    public static String parseDouble(Double value) {
+
         java.util.Currency usd = java.util.Currency.getInstance("USD");
         java.text.NumberFormat format = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.US);
         format.setCurrency(usd);

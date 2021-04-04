@@ -8,13 +8,13 @@ public class ProductRecord {
     private String productDescription;
     private String regularDisplayPrice;
 
-    private double regularCalculatorPrice;
+    private String regularCalculatorPrice;
 
     private String saleDisplayPrice;
-    private double saleCalculatorPrice;
+    private String saleCalculatorPrice;
 
     private UnitOfMeasure unitOfMeasure;
-    private double taxRate;
+    private String taxRate;
 
     // TODO: use Lombok?
 
@@ -42,12 +42,12 @@ public class ProductRecord {
         this.regularDisplayPrice = regularDisplayPrice;
     }
 
-    public double getRegularCalculatorPrice() {
+    public String getRegularCalculatorPrice() {
         return regularCalculatorPrice;
     }
 
-    public void setRegularCalculatorPrice(double regularCalculatorPrice) {
-        this.regularCalculatorPrice = regularCalculatorPrice;
+    public String setRegularCalculatorPrice(String regularCalculatorPrice) {
+        return this.regularCalculatorPrice = regularCalculatorPrice;
     }
 
     public String getSaleDisplayPrice() {
@@ -58,11 +58,11 @@ public class ProductRecord {
         this.saleDisplayPrice = saleDisplayPrice;
     }
 
-    public double getSaleCalculatorPrice() {
+    public String getSaleCalculatorPrice() {
         return saleCalculatorPrice;
     }
 
-    public void setSaleCalculatorPrice(double saleCalculatorPrice) {
+    public void setSaleCalculatorPrice(String saleCalculatorPrice) {
         this.saleCalculatorPrice = saleCalculatorPrice;
     }
 
@@ -74,11 +74,11 @@ public class ProductRecord {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    public double getTaxRate() {
+    public String getTaxRate() {
         return taxRate;
     }
 
-    public void setTaxRate(double taxRate) {
+    public void setTaxRate(String taxRate) {
         this.taxRate = taxRate;
     }
 }

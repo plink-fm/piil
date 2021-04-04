@@ -20,4 +20,9 @@ public class InputItem {
     public Field getField(String key) {
         return fields.get(key);
     }
+
+    // TODO: this needs to come from properties file through InputItemSpecification
+    public String getTaxRate() {
+        return "0.07775";
+    }
 }
