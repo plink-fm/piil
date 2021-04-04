@@ -1,0 +1,8 @@
+mail.hostname=host@mail.com
+mail.port=9000
+mail.from=mailer@mail.com
+
+inputItemDescriptors[0].start=1
+inputItemDescriptors[0].end=8
+inputItemDescriptors[0].name=ProductID
+inputItemDescriptors[0].type=Number

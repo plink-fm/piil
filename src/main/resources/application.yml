@@ -1,0 +1,56 @@
+#inputItemDescriptors[0].start=1
+#inputItemDescriptors[0].end=8
+#inputItemDescriptors[0].name=ProductID
+#inputItemDescriptors[0].type=Number
+
+inputItemDescriptors:
+  -
+    start: 1
+    end: 8
+    name: Product ID
+    type: Number
+  -
+    start: 10
+    end: 68
+    name: Product Description
+    type: String
+  -
+    start: 70
+    end: 77
+    name: Regular Each Price
+    type: Currency
+  -
+    start: 79
+    end: 86
+    name: Sale Each Price
+    type: Currency
+  -
+    start: 88
+    end: 95
+    name: Regular Split Price
+    type: Currency
+  -
+    start: 97
+    end: 104
+    name: Sale Split Price
+    type: Currency
+  -
+    start: 106
+    end: 113
+    name: Regular Split Quantity
+    type: Number
+  -
+    start: 115
+    end: 122
+    name: Sale Split Quantity
+    type: Number
+  -
+    start: 124
+    end: 132
+    name: Flags
+    type: Flags
+  -
+    start: 134
+    end: 142
+    name: Product Size
+    type: String
