@@ -1,5 +1,7 @@
 package com.plink.swfsys.piil.service;
 
+import com.plink.swfsys.piil.service.common.data.DefaultProductRecord;
+import com.plink.swfsys.piil.service.data.ProductRecord;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class ProductInfoIngestionLibraryServiceTest {
@@ -28,10 +32,22 @@ class ProductInfoIngestionLibraryServiceTest {
     }
 
     @Test
-    void testProcessStore() {
+    void testProcessStore_Success() {
         List<String> inputList = Arrays.stream(inputLines).collect(Collectors.toList());
 
-        productInfoIngestionLibraryService.processStore(inputList);
+        List<ProductRecord> productRecords = productInfoIngestionLibraryService.processStore(inputList);
+
+        DefaultProductRecord productRecord = (DefaultProductRecord) productRecords.get(0);
+        assertEquals(productRecord.getProductDescription(), "Kimchi-flavored white rice");
+        assertEquals(productRecord.getRegularDisplayPrice(), "$5.67");
+        assertEquals(productRecord.getUnitOfMeasure(), "Each");
+        assertEquals(productRecord.getTaxRate(), "0.00");
+
+        productRecord = (DefaultProductRecord) productRecords.get(1);
+        assertEquals(productRecord.getProductDescription(), "Generic Soda 12-pack");
+        assertEquals(productRecord.getRegularDisplayPrice(), "2 for $13.00");
+        assertEquals(productRecord.getTaxRate(), "0.07775");
+
     }
 
 }

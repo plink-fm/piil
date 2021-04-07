@@ -15,7 +15,7 @@ public class FixedWidthStringInputItemReader implements InputItemReader {
     private FieldFactory fieldFactory = new FieldFactory();
 
     @Override
-    public com.plink.swfsys.piil.service.data.InputItem readItem(InputSpecification inputSpecification, String inputStr) {
+    public InputItem readItem(InputSpecification inputSpecification, String inputStr) {
         if (inputStr == null) {
             return null;
         }
@@ -24,20 +24,28 @@ public class FixedWidthStringInputItemReader implements InputItemReader {
 
         InputItem inputItem = new DefaultInputItem();
 
-        // loop through inputItemDescriptors and create a list of FieldReaders of concrete types
+        // loop through inputItemDescriptors and create a list of Field objects of concrete types
         for (InputItemDescriptor inputItemDescriptor : inputItemDescriptors) {
 
-            // TODO:  add config item for whether start/end are zero- or one-index based
-            String data = inputStr.substring(
-                    ((FixedWidthInputItemDescriptor) inputItemDescriptor).getStart() - 1,
-                    ((FixedWidthInputItemDescriptor) inputItemDescriptor).getEnd());
+            // Note:  descriptor item for start/end are one- based
+            String data;
 
-            Field field = fieldFactory.getField(data, inputItemDescriptor.getType());
-            inputItem.addField(inputItemDescriptor.getName(), field);
+            try {
+                data = inputStr.substring(
+                        ((FixedWidthInputItemDescriptor) inputItemDescriptor).getStart() - 1,
+                        ((FixedWidthInputItemDescriptor) inputItemDescriptor).getEnd());
+
+                Field field = fieldFactory.getField(data, inputItemDescriptor.getType());
+                inputItem.addField(inputItemDescriptor.getName(), field);
+            }
+            catch (Exception e) {
+                // TODO: capture and aggregate error items
+                System.out.println(String.format("Error reading item: %s", inputStr));
+                e.printStackTrace();
+                return null;
+            }
         }
 
         return inputItem;
     }
-
-
 }

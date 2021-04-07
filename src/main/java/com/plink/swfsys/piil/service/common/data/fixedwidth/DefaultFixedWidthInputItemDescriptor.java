@@ -1,20 +1,11 @@
 package com.plink.swfsys.piil.service.common.data.fixedwidth;
 
 public class DefaultFixedWidthInputItemDescriptor implements FixedWidthInputItemDescriptor {
+
     private Integer start;
     private Integer end;
     private String name;
     private String type;
-
-//    public DefaultFixedWidthInputItemDescriptor() {
-//    }
-//
-//    public DefaultFixedWidthInputItemDescriptor(Integer start, Integer end, String name, String type) {
-//        this.start = start;
-//        this.end = end;
-//        this.name = name;
-//        this.type = type;
-//    }
 
     @Override
     public Integer getStart() {
