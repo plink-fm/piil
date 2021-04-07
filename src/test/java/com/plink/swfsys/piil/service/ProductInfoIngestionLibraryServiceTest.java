@@ -3,8 +3,11 @@ package com.plink.swfsys.piil.service;
 import com.plink.swfsys.piil.service.common.data.DefaultProductRecord;
 import com.plink.swfsys.piil.service.data.ProductRecord;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +15,10 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ProductInfoIngestionLibraryServiceTest {
+public class ProductInfoIngestionLibraryServiceTest {
 
     private final String[] inputLines = new String[]{
             "80000001 Kimchi-flavored white rice                                  00000567 00000000 00000000 00000000 00000000 00000000 NNNNNNNNN      18oz",
