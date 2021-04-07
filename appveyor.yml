@@ -4,7 +4,8 @@ build:
   verbosity: detailed
 
 build_script:
-  - cmd: .\gradlew.bat assemble --no-daemon
+  - cmd: .\gradlew.bat build
+#  - cmd: .\gradlew.bat assemble --no-daemon
 
 test_script:
   - cmd: .\gradlew.bat check --no-daemon
@@ -16,6 +17,9 @@ branches:
 
 cache:
   - C:\Users\appveyor\.gradle
+
+artifacts:
+  path: .\piil\bin\debug\piil.jar
 
 environment:
   matrix:
