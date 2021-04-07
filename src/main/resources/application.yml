@@ -1,12 +1,9 @@
-#inputItemDescriptors[0].start=1
-#inputItemDescriptors[0].end=8
-#inputItemDescriptors[0].name=ProductID
-#inputItemDescriptors[0].type=Number
 
-storeId: 1
+chainId: 321
+storeId: 5432
 taxRate: 0.07775
 
-inputItemDescriptors:
+fixedWidthInputItemDescriptors:
   -
     start: 1
     end: 8
@@ -57,3 +54,4 @@ inputItemDescriptors:
     end: 142
     name: Product Size
     type: String
+

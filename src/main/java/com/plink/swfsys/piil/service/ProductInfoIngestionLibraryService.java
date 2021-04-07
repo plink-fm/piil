@@ -1,11 +1,17 @@
 package com.plink.swfsys.piil.service;
 
 import com.plink.swfsys.piil.ConfigProperties;
-import com.plink.swfsys.piil.data.input.InputItemDescriptor;
-import com.plink.swfsys.piil.data.input.impl.*;
+import com.plink.swfsys.piil.service.common.DefaultProductRecordWriter;
+import com.plink.swfsys.piil.chain_x.handler.*;
+import com.plink.swfsys.piil.service.common.DefaultProductRecordFactory;
+import com.plink.swfsys.piil.service.common.data.fixedwidth.FixedWidthStringInputItemReader;
+import com.plink.swfsys.piil.service.common.DefaultProductRecordPostProcessor;
+import com.plink.swfsys.piil.service.common.data.DefaultInputSpecification;
+import com.plink.swfsys.piil.service.common.data.fixedwidth.DefaultFixedWidthInputItemDescriptor;
+import com.plink.swfsys.piil.service.data.InputItem;
+import com.plink.swfsys.piil.service.data.InputSpecification;
+import com.plink.swfsys.piil.service.data.ProductRecord;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,50 +24,115 @@ public class ProductInfoIngestionLibraryService {
     @Autowired
     private ConfigProperties configProperties;
 
-    private List<InputItemDescriptor> inputItemDescriptors;
-    private InputItemReader inputItemReader;
-    private InputItemTransformer inputItemTransformer;
-    private ProductRecordWriter productRecordWriter;
+    private List<DefaultFixedWidthInputItemDescriptor> fixedWidthInputItemDescriptors;
+
+    private InputSpecification inputSpecification;
 
     public ProductInfoIngestionLibraryService(ConfigProperties configProperties) {
         this.configProperties = configProperties;
-        inputItemDescriptors = configProperties.getInputItemDescriptors();
 
         // TODO: read in global settings from properties file, like storeId and taxRate
         // TODO: create an InputItemSpecification that wraps the descriptors and globals?
-        inputItemReader = new InputItemReader(inputItemDescriptors);
 
-        inputItemTransformer = new InputItemTransformer(inputItemDescriptors);
-        productRecordWriter = new ProductRecordWriter();
+        // TODO: move the creation of the InputItemSpecification outside this class?
+        fixedWidthInputItemDescriptors = configProperties.getFixedWidthInputItemDescriptors();
+
+        inputSpecification = new DefaultInputSpecification(
+                configProperties.getChainId(),
+                configProperties.getStoreId(),
+                configProperties.getTaxRate(),
+                fixedWidthInputItemDescriptors);
+
+        writer = new DefaultProductRecordWriter();
+
+        handlers = new ArrayList<>();
+        handlers.add(new ChainXStringHandler());
+        handlers.add(new ChainXDisplayPriceHandler());
+        handlers.add(new ChainXCalculatorHandler());
+        handlers.add(new ChainXUnitOfMeasureHandler());
+        handlers.add(new ChainXTaxHandler());
+
+        postProcessors = new ArrayList<>();
+        postProcessors.add(new DefaultProductRecordPostProcessor());
     }
 
 
-    public List<ProductRecord> process() {
+    private InputItemReader inputItemReader2 = new FixedWidthStringInputItemReader();
+    private ProductRecordFactory defaultProductRecordFactory = new DefaultProductRecordFactory();
+    private List<InputItemHandler> handlers;
+    private ProductRecordWriter writer;
+    private List<ProductRecordPostProcessor> postProcessors;
 
-        // TODO: identify the store - "Each store in a grocery chain has its own product catalog service"
+    public List<ProductRecord> processStore(List<String> inData) {
 
-        // TODO: read from file
-        String[] inputLines = new String[]{
-                "80000001 Kimchi-flavored white rice                                  00000567 00000000 00000000 00000000 00000000 00000000 NNNNNNNNN      18oz",
-                "14963801 Generic Soda 12-pack                                        00000000 00000549 00001300 00000000 00000002 00000000 NNNNYNNNN   12x12oz",
-                "40123401 Marlboro Cigarettes                                         00001000 00000549 00000000 00000000 00000000 00000000 YNNNNNNNN          ",
-                "50133333 Fuji Apples (Organic)                                       00000349 00000000 00000000 00000000 00000000 00000000 NNYNNNNNN        lb"
-        };
+        return processStore(inputSpecification,
+                inData,
+                inputItemReader2,
+                defaultProductRecordFactory,
+                handlers,
+                writer,
+                postProcessors);
+    }
 
-        List<InputItem> inputItems = new ArrayList<>();
+    public List<ProductRecord> processStore(InputSpecification inputSpecification,
+                                            List<String> inData) {
+
+        return processStore(inputSpecification,
+                inData,
+                inputItemReader2,
+                defaultProductRecordFactory,
+                handlers,
+                writer,
+                postProcessors);
+    }
+
+    public List<ProductRecord> processStore(InputSpecification inputSpecification,
+                                            List<String> inData,
+                                            InputItemReader inputItemReader,
+                                            ProductRecordFactory productRecordFactory,
+                                            List<InputItemHandler> handlers,
+                                            ProductRecordWriter writer,
+                                            List<ProductRecordPostProcessor> postProcessors) {
+
+        System.out.println();
+//
+//        // TODO: read from file
+//        String[] inputLines = new String[]{
+//                "80000001 Kimchi-flavored white rice                                  00000567 00000000 00000000 00000000 00000000 00000000 NNNNNNNNN      18oz",
+//                "14963801 Generic Soda 12-pack                                        00000000 00000549 00001300 00000000 00000002 00000000 NNNNYNNNN   12x12oz",
+//                "40123401 Marlboro Cigarettes                                         00001000 00000549 00000000 00000000 00000000 00000000 YNNNNNNNN          ",
+//                "50133333 Fuji Apples (Organic)                                       00000349 00000000 00000000 00000000 00000000 00000000 NNYNNNNNN        lb"
+//        };
+//
+
         List<ProductRecord> productRecords = new ArrayList<>();
 
-        for (String inputLine : inputLines) {
+        //
+        // Processing pipeline:  read input -> create ProductRecord -> run handlers -> writer -> run any post processors
+        //
 
-            InputItem inputItem = inputItemReader.readItem(inputLine);
-            inputItems.add(inputItem);
+        for (String inLine : inData) {
 
-            inputItemTransformer.transform(inputItem);
-            ProductRecord productRecord = productRecordWriter.create(inputItem);
+            InputItem inputItem = inputItemReader.readItem(inputSpecification, inLine);
+
+            ProductRecord productRecord = productRecordFactory.create(inputSpecification, inputItem);
             productRecords.add(productRecord);
+
+            for (InputItemHandler handler : handlers) {
+                handler.handleItem(inputSpecification, inputItem, productRecord);
+            }
+
+            writer.write(inputSpecification, inputItem, productRecord);
+            System.out.println(productRecord);
+
+            for (ProductRecordPostProcessor postProcessor : postProcessors) {
+                postProcessor.process(productRecord);
+            }
         }
 
-        // TODO: persist ProductRecords?
+        System.out.println();
         return productRecords;
     }
+
+
 }

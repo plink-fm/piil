@@ -1,53 +1,50 @@
 package com.plink.swfsys.piil;
 
-import com.plink.swfsys.piil.data.input.InputItemDescriptor;
+import com.plink.swfsys.piil.service.common.data.fixedwidth.DefaultFixedWidthInputItemDescriptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@ConfigurationProperties//(prefix = "mail")
+@ConfigurationProperties
 public class ConfigProperties {
 
-    private String hostName;
-    private int port;
-    private String from;
+    private Integer chainId;
+    private Integer storeId;
+    private Double taxRate;
 
-    public String getHostName() {
-        return hostName;
+    public Integer getChainId() {
+        return chainId;
     }
 
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    public void setChainId(Integer chainId) {
+        this.chainId = chainId;
     }
 
-    public int getPort() {
-        return port;
+    public Integer getStoreId() {
+        return storeId;
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
-    public String getFrom() {
-        return from;
+    public Double getTaxRate() {
+        return taxRate;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setTaxRate(Double taxRate) {
+        this.taxRate = taxRate;
     }
 
-    // ------------------------------
-    // TODO: Delete everything above
-
-    public List<InputItemDescriptor> getInputItemDescriptors() {
-        return inputItemDescriptors;
+    public List<DefaultFixedWidthInputItemDescriptor> getFixedWidthInputItemDescriptors() {
+        return fixedWidthInputItemDescriptors;
     }
 
-    public void setInputItemDescriptors(List<InputItemDescriptor> inputItemDescriptors) {
-        this.inputItemDescriptors = inputItemDescriptors;
+    public void setFixedWidthInputItemDescriptors(List<DefaultFixedWidthInputItemDescriptor> fixedWidthInputItemDescriptors) {
+        this.fixedWidthInputItemDescriptors = fixedWidthInputItemDescriptors;
     }
 
-    private List<InputItemDescriptor> inputItemDescriptors;
+    private List<DefaultFixedWidthInputItemDescriptor> fixedWidthInputItemDescriptors;
 }

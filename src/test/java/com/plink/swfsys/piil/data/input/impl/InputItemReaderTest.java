@@ -16,8 +16,8 @@ public class InputItemReaderTest {
 
     @Test
     void testReader1() {
-        InputItemReader inputItemReader = new InputItemReader(configProperties.getInputItemDescriptors());
-        inputItemReader.readItem(testLine1);
+//        InputItemReader inputItemReader = new InputItemReader(configProperties.getInputItemDescriptors());
+//        inputItemReader.readItem(testLine1);
 
     }
 }

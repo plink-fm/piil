@@ -14,25 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableConfigurationProperties(ConfigProperties.class)
 public class PiilApplication {
 
-	@Autowired
-	private ConfigProperties configProperties;
+    @Autowired
+    private ConfigProperties configProperties;
 
 //	@Autowired
 //	private Environment env;
 
-	@Autowired
-	private ProductInfoIngestionLibraryService productInfoIngestionLibraryService;
+    @Autowired
+    private ProductInfoIngestionLibraryService productInfoIngestionLibraryService;
 
-	public static void main(String[] args) {
-		SpringApplication.run(PiilApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PiilApplication.class, args);
+    }
 
-	@RequestMapping(value = "/")
-	public String hello() {
+    @RequestMapping(value = "/")
+    public String hello() {
 
-		productInfoIngestionLibraryService.process();
+//        productInfoIngestionLibraryService.process();
 
-		return "Hello World";
-	}
+        // TODO: need to be able to pass in data here to processStore:
+        productInfoIngestionLibraryService.processStore(null);
+
+        return "Hello World";
+    }
 
 }
