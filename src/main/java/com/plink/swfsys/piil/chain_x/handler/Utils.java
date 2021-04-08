@@ -13,7 +13,9 @@ public class Utils {
         }
         catch (ParseException e) {
             // TODO: don't swallow exception
-            System.out.print(e);
+            System.out.print("Error parsing String to Double: " + s);
+            e.printStackTrace();
+            return 0.00D;
         }
         return number.doubleValue();
     }
