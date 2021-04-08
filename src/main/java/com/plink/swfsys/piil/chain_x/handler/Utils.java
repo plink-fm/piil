@@ -2,11 +2,12 @@ package com.plink.swfsys.piil.chain_x.handler;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Locale;
 
 public class Utils {
 
     static public Double parseStr(String s) {
-        NumberFormat cf = NumberFormat.getCurrencyInstance();
+        NumberFormat cf = NumberFormat.getCurrencyInstance(Locale.US);
         Number number = null;
         try {
             number = cf.parse(s);
