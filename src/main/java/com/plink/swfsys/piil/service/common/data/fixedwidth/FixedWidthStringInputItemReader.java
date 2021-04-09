@@ -40,7 +40,8 @@ public class FixedWidthStringInputItemReader implements InputItemReader {
             }
             catch (Exception e) {
                 // TODO: capture and aggregate error items
-                System.out.println(String.format("Error reading item: %s", inputStr));
+                System.out.println(String.format("Error reading item field \'%s\': %s",
+                        ((FixedWidthInputItemDescriptor) inputItemDescriptor).getName(), inputStr));
                 e.printStackTrace();
                 return null;
             }

@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//@EnableConfigurationProperties(ConfigProperties.class)
 @Component
 public class ProductInfoIngestionLibraryService {
 
@@ -114,6 +113,9 @@ public class ProductInfoIngestionLibraryService {
         for (String inLine : inData) {
 
             InputItem inputItem = inputItemReader.readItem(inputSpecification, inLine);
+            if (inputItem == null) {
+                continue;
+            }
 
             ProductRecord productRecord = productRecordFactory.create(inputSpecification, inputItem);
             productRecords.add(productRecord);
