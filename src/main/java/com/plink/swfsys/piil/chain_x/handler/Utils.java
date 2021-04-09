@@ -6,18 +6,9 @@ import java.util.Locale;
 
 public class Utils {
 
-    static public Double parseStr(String s) {
+    static public Double parseStr(String s) throws ParseException {
         NumberFormat cf = NumberFormat.getCurrencyInstance(Locale.US);
-        Number number = null;
-        try {
-            number = cf.parse(s);
-        }
-        catch (ParseException e) {
-            // TODO: don't swallow exception
-            System.out.print("Error parsing String to Double: " + s);
-            e.printStackTrace();
-            return 0.00D;
-        }
+        Number number = cf.parse(s);
         return number.doubleValue();
     }
 }

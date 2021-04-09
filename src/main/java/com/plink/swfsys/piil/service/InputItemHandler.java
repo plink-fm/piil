@@ -13,5 +13,5 @@ import com.plink.swfsys.piil.service.data.ProductRecord;
  */
 public interface InputItemHandler {
 
-    void handleItem(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord);
+    void handleItem(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord) throws Exception;
 }

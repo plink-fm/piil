@@ -106,8 +106,6 @@ public class DefaultProductRecord implements ProductRecord {
 
     @Override
     public String toString () {
-        // TODO: this is for temporary tactile feedback while running the app.  Remove.
-
         StringBuilder sb = new StringBuilder();
         sb.append(productId);
         sb.append(TRAILING_DELIMITER);

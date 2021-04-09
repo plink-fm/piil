@@ -11,15 +11,17 @@ import com.plink.swfsys.piil.service.data.InputItem;
 import com.plink.swfsys.piil.service.data.InputSpecification;
 import com.plink.swfsys.piil.service.data.ProductRecord;
 
+import java.text.ParseException;
+
 public class ChainXDisplayPriceHandler implements InputItemHandler {
 
     @Override
-    public void handleItem(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord) {
+    public void handleItem(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord) throws Exception {
         displayPriceInner(inputItem, PriceLevel.Regular, productRecord);
         displayPriceInner(inputItem, PriceLevel.Sale, productRecord);
     }
 
-    protected void displayPriceInner(InputItem inputItem, PriceLevel priceLevel, ProductRecord productRecord) {
+    protected void displayPriceInner(InputItem inputItem, PriceLevel priceLevel, ProductRecord productRecord) throws ParseException {
         String displayPrice;
         PriceLevelDescriptor priceLevelDescriptor;
 

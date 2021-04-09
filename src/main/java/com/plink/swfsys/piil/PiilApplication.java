@@ -41,7 +41,6 @@ public class PiilApplication implements CommandLineRunner {
 
     /**
      * CommandLineRunner interface
-     * @param args
      */
     @Override
     public void run(String... args) {
@@ -74,7 +73,7 @@ public class PiilApplication implements CommandLineRunner {
     @PostMapping("/processFile")
     public String processFile(@RequestParam("file") MultipartFile file/*, RedirectAttributes redirectAttributes*/) {
 
-        // TODO: authentication and authorization
+        // TODO: handle authentication and authorization
 
         if (file.isEmpty()) {
             return "Error:  input file is empty";

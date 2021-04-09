@@ -11,7 +11,6 @@ public class DefaultInputItem implements InputItem {
     private Map<String, Field> fields = new HashMap<>();
 
     public DefaultInputItem() {
-
     }
 
     public void addField(String key, Field field) {
@@ -22,8 +21,4 @@ public class DefaultInputItem implements InputItem {
         return fields.get(key);
     }
 
-    // TODO: this needs to come from properties file through InputItemSpecification
-    public String getTaxRate() {
-        return "0.07775";
-    }
 }

@@ -5,6 +5,4 @@ public class FlagsField extends StringField {
     FlagsField(String data) {
         super(data);
     }
-
-
 }

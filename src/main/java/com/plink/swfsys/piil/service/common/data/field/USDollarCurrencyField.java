@@ -5,8 +5,6 @@ import java.util.Currency;
 
 public class USDollarCurrencyField implements CurrencyField<Currency> {
 
-    // TODO: clean up this class
-
     private String data;
 
     public USDollarCurrencyField(String data) {
@@ -26,9 +24,6 @@ public class USDollarCurrencyField implements CurrencyField<Currency> {
 
     /**
      * Parses a string into a USD string. Assumes a format of last 2 digits are cents (without '.' delimiter).
-     *
-     * @param data
-     * @return the USD string
      */
     protected static String parse(String data) {
 
@@ -48,9 +43,6 @@ public class USDollarCurrencyField implements CurrencyField<Currency> {
 
     /**
      * Parses a raw double into a USD string.
-     *
-     * @param value
-     * @return the USD string
      */
     public static String parseDouble(Double value) {
         // TODO: externalize Currency to account for other locales

@@ -10,7 +10,6 @@ public class IntegerField implements NumberField<Integer> {
 
     @Override
     public void setData(Number data) {
-        // TODO: can something be done about this cast?
         this.data = (Integer) data;
     }
 

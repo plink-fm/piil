@@ -30,7 +30,7 @@ public class ProductInfoIngestionLibraryService {
     public ProductInfoIngestionLibraryService(ConfigProperties configProperties) {
         this.configProperties = configProperties;
 
-        // TODO: move the creation of the InputItemSpecification outside this class?
+        // TODO: move the creation of the InputItemSpecification to a factory class
         fixedWidthInputItemDescriptors = configProperties.getFixedWidthInputItemDescriptors();
 
         inputSpecification = new DefaultInputSpecification(
@@ -102,6 +102,7 @@ public class ProductInfoIngestionLibraryService {
 
             InputItem inputItem = inputItemReader.readItem(inputSpecification, inLine);
             if (inputItem == null) {
+                // TODO: capture and aggregate error items
                 continue;
             }
 
@@ -109,13 +110,21 @@ public class ProductInfoIngestionLibraryService {
             productRecords.add(productRecord);
 
             for (InputItemHandler handler : handlers) {
-                handler.handleItem(inputSpecification, inputItem, productRecord);
+                try {
+                    handler.handleItem(inputSpecification, inputItem, productRecord);
+                } catch (Exception e) {
+                    // TODO: capture and aggregate error items
+                    System.out.println(String.format("Error handling item: %s  %s",
+                            inputItem.getField("Product ID").getData(), inputItem.getField("Product ID").getData()));
+                    e.printStackTrace();
+                }
             }
 
             writer.write(inputSpecification, inputItem, productRecord);
             System.out.println(productRecord);
 
             for (ProductRecordPostProcessor postProcessor : postProcessors) {
+                // TODO: capture and aggregate error items
                 postProcessor.process(productRecord);
             }
         }

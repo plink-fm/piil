@@ -14,14 +14,7 @@ jobs:
           java-version: 1.11
       - name: Build with Gradle
         run: ./gradlew build
-#        run: ./gradlew build --info
-#      - run: mkdir -p target/
       - uses: actions/upload-artifact@v2
         with:
-          name: Package
+          name: PiilPackage
           path: build/libs
-#      - name: Upload a Build Artifact
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: artifact
-#          path: target/piil.jar

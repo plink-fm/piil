@@ -20,31 +20,36 @@ The following figure depicts the processing pipeline.
 
 The processing pipeline is defined as a set of interfaces, for which default implementations are provided (including a fixed-width input item reader).  The handlers provide the "grocery chain-specific" business logic for performing calculations and formatting (e.g. `ChainXFooHandler`). 
 
+#### Packages and classes of interest
+ - the `com.plink.swfsys.piil.service` package root contains the common code (and data) structure and default handlers
+ - `com.plink.swfsys.piil.chain_x.handler` contains 'Chain X' specific handlers for calculation and formatting
+ - the `ProductInfoIngestionLibraryService` class provides the primary entry point for input item data processing, including overloads for custom extensions
+
 This service is implemented as a Spring Boot application, and may be invoked either via command line or an HTTP endpoint.
 
 #### Running the piil application
 
-To run the application, download the [Package.zip](https://github.com/plink-fm/piil/suites/2450896733/artifacts/52543565), unzip, and run the jar file:  
+To run the application, download the [PiilPackage.zip](https://github.com/plink-fm/piil/suites/2450896733/artifacts/52543565), unzip, and run the jar file:  
 `java -jar piil-0.0.1-SNAPSHOT.jar` 
 
-This will start the application bound to port 8080 by default.  
+ - The application will bind to port 8080 by default.  
 
-Optionally specify the server port as a command line arg, e.g.:
+ - (Optional) specify the server port as a command line arg, e.g.:
 `-Dserver.port=9001`
 
-Optionally specify a fixed-width format file (as defined in the specification) as the first parameter, e.g.:
+ - (Optional) specify a fixed-width format file (as defined in the specification) as the first parameter, e.g.:
 `java -jar piil-0.0.1-SNAPSHOT.jar ./inputData.txt`
 
-Optionally post an input file tp the /processInput endpoint, e.g.:
+ - (Optional) post an input file tp the /processInput endpoint, e.g.:
 `POST http://localhost:8080/processFile` with a `file` parameter loaded as the post body.
 
-Optionally pull down source and run tests, e.g. `ProductInfoIngestionLibraryServiceTest`
+ - (Optional) pull down source and run tests, e.g. `ProductInfoIngestionLibraryServiceTest`
 
 #### Future Enhancements
 
  - `ProductRecord` persistence
  - add parameterized `InputSpecification`
  - add authentication/authorization
- - devise a strategy for capturing error items
- - develop `BatchInputJobSplitHandler` based on observed throughput
+ - devise a strategy for capturing and aggregating error items
+ - develop `BatchInputJobSplitHandler` based on observed throughput; this service-level handler will split the input data batch across n threads for parallel prcessing
   

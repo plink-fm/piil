@@ -11,16 +11,17 @@ import com.plink.swfsys.piil.service.data.ProductRecord;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 
 public class ChainXCalculatorHandler implements InputItemHandler {
 
     @Override
-    public void handleItem(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord) {
+    public void handleItem(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord) throws Exception {
         calculatorPriceInner(inputItem, PriceLevel.Regular, productRecord);
         calculatorPriceInner(inputItem, PriceLevel.Sale, productRecord);
     }
 
-    protected void calculatorPriceInner(InputItem inputItem, PriceLevel priceLevel, ProductRecord productRecord) {
+    protected void calculatorPriceInner(InputItem inputItem, PriceLevel priceLevel, ProductRecord productRecord) throws ParseException {
         String splitPriceStr = ((USDollarCurrencyField) inputItem.getField(priceLevel.toString() + " Split Price")).getData();
         Double splitPrice = Utils.parseStr(splitPriceStr);
 

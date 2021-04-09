@@ -9,8 +9,6 @@ import com.plink.swfsys.piil.service.data.ProductRecord;
 
 public class DefaultProductRecordWriter implements ProductRecordWriter {
 
-    // TODO: is there a better name for this class? Writer might imply persistence
-
     @Override
     public void write(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord) {
 
@@ -31,8 +29,6 @@ public class DefaultProductRecordWriter implements ProductRecordWriter {
 
         productRecord.setProductId(((IntegerField) inputItem.getField("Product ID")).getData());
         productRecord.setProductDescription(((StringField) inputItem.getField("Product Description")).getData());
-
-
     }
 
 }

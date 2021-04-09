@@ -9,7 +9,7 @@ import java.util.concurrent.RecursiveAction;
 
 public class BatchInputJobSplitHandler extends RecursiveAction {
 
-    // TODO: finish this class! Measure typical throughput when persistemce is wired up, etc. and iterate on this divide-and-conquer
+    // TODO: finish this class. Measure typical throughput when persistemce is wired up, etc. and iterate on this for divide-and-conquer
 
     @Autowired
     private ProductInfoIngestionLibraryService productInfoIngestionLibraryService;
