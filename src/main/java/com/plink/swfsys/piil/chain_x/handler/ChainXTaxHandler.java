@@ -17,7 +17,7 @@ public class ChainXTaxHandler implements InputItemHandler {
     protected void setTaxRateInner(InputItem inputItem, ProductRecord productRecord, Double globalTaxRate) {
         final String flags = ((StringField) inputItem.getField("Flags")).getData();
 
-        // TODO:  should the index 5 come from elsewhere?  InputSpecification?
+        // TODO:  source index 5 from the InputSpecification
         final String flag = String.valueOf(flags.charAt(5 - 1));
 
         boolean isTaxable = flag.equals("Y");

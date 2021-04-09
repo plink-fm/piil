@@ -20,7 +20,7 @@ The following figure depicts the processing pipeline.
 
 The processing pipeline is defined as a set of interfaces, for which default implementations are provided (including a fixed-width input item reader).  The handlers provide the "grocery chain-specific" business logic for performing calculations and formatting (e.g. `ChainXFooHandler`). 
 
-This service is implemented as a Spring Boot application, and may be invoked either via command line or (**TODO**) HTTP endpoints.
+This service is implemented as a Spring Boot application, and may be invoked either via command line or an HTTP endpoint.
 
 #### Running the piil application
 
@@ -38,4 +38,13 @@ Optionally specify a fixed-width format file (as defined in the specification) a
 Optionally post an input file tp the /processInput endpoint, e.g.:
 `POST http://localhost:8080/processFile` with a `file` parameter loaded as the post body.
 
+Optionally pull down source and run tests, e.g. `ProductInfoIngestionLibraryServiceTest`
+
+#### Future Enhancements
+
+ - `ProductRecord` persistence
+ - add parameterized `InputSpecification`
+ - add authentication/authorization
+ - devise a strategy for capturing error items
+ - develop `BatchInputJobSplitHandler` based on observed throughput
   

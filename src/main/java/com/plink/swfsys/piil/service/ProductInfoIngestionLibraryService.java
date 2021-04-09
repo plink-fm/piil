@@ -30,9 +30,6 @@ public class ProductInfoIngestionLibraryService {
     public ProductInfoIngestionLibraryService(ConfigProperties configProperties) {
         this.configProperties = configProperties;
 
-        // TODO: read in global settings from properties file, like storeId and taxRate
-        // TODO: create an InputItemSpecification that wraps the descriptors and globals?
-
         // TODO: move the creation of the InputItemSpecification outside this class?
         fixedWidthInputItemDescriptors = configProperties.getFixedWidthInputItemDescriptors();
 
@@ -94,15 +91,6 @@ public class ProductInfoIngestionLibraryService {
                                             List<ProductRecordPostProcessor> postProcessors) {
 
         System.out.println();
-//
-//        // TODO: read from file
-//        String[] inputLines = new String[]{
-//                "80000001 Kimchi-flavored white rice                                  00000567 00000000 00000000 00000000 00000000 00000000 NNNNNNNNN      18oz",
-//                "14963801 Generic Soda 12-pack                                        00000000 00000549 00001300 00000000 00000002 00000000 NNNNYNNNN   12x12oz",
-//                "40123401 Marlboro Cigarettes                                         00001000 00000549 00000000 00000000 00000000 00000000 YNNNNNNNN          ",
-//                "50133333 Fuji Apples (Organic)                                       00000349 00000000 00000000 00000000 00000000 00000000 NNYNNNNNN        lb"
-//        };
-//
 
         List<ProductRecord> productRecords = new ArrayList<>();
 

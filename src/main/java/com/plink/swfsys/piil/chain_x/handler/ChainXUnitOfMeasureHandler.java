@@ -18,7 +18,7 @@ public class ChainXUnitOfMeasureHandler implements InputItemHandler {
     protected void setUnitOfMeasureInner(InputItem inputItem, ProductRecord productRecord) {
         final String flags = ((StringField) inputItem.getField("Flags")).getData();
 
-        // TODO:  should the index 3 come from elsewhere?  InputSpecification?
+        // TODO:  source index 3 from the InputSpecification
         final String flag = String.valueOf(flags.charAt(3 - 1));
 
         boolean isPerWeight = flag.equals("Y");
