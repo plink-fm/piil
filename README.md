@@ -16,7 +16,7 @@ The library is implemented as a processing chain that provides several plugin po
 
 The following figure depicts the processing pipeline.
 
-![piil Processing Pipeline](./ProcessingPipeline.png)
+![piil Processing Pipeline](https://github.com/plink-fm/piil/blob/master/ProcessingPipeline.PNG?raw=true)
 
 The processing pipeline is defined as a set of interfaces, for which default implementations are provided (including a fixed-width input item reader).  The handlers provide the "grocery chain-specific" business logic for performing calculations and formatting (e.g. `ChainXFooHandler`). 
 
