@@ -1,12 +1,12 @@
 package com.plink.swfsys.piil.service;
 
 import com.plink.swfsys.piil.ConfigProperties;
+import com.plink.swfsys.piil.chain_x.data.ChainXInputSpecification;
 import com.plink.swfsys.piil.service.common.DefaultProductRecordWriter;
 import com.plink.swfsys.piil.chain_x.handler.*;
 import com.plink.swfsys.piil.service.common.DefaultProductRecordFactory;
 import com.plink.swfsys.piil.service.common.data.fixedwidth.FixedWidthStringInputItemReader;
 import com.plink.swfsys.piil.service.common.DefaultProductRecordPostProcessor;
-import com.plink.swfsys.piil.service.common.data.DefaultInputSpecification;
 import com.plink.swfsys.piil.service.common.data.fixedwidth.DefaultFixedWidthInputItemDescriptor;
 import com.plink.swfsys.piil.service.data.InputItem;
 import com.plink.swfsys.piil.service.data.InputSpecification;
@@ -33,11 +33,13 @@ public class ProductInfoIngestionLibraryService {
         // TODO: move the creation of the InputItemSpecification to a factory class
         fixedWidthInputItemDescriptors = configProperties.getFixedWidthInputItemDescriptors();
 
-        inputSpecification = new DefaultInputSpecification(
+        inputSpecification = new ChainXInputSpecification(
                 configProperties.getChainId(),
                 configProperties.getStoreId(),
                 configProperties.getTaxRate(),
-                fixedWidthInputItemDescriptors);
+                fixedWidthInputItemDescriptors,
+                configProperties.getPerWeightFlagIndex(),
+                configProperties.getTaxableFlagIndex());
 
         writer = new DefaultProductRecordWriter();
 

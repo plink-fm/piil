@@ -10,9 +10,12 @@ import java.util.List;
 @ConfigurationProperties
 public class ConfigProperties {
 
+    private List<DefaultFixedWidthInputItemDescriptor> fixedWidthInputItemDescriptors;
     private Integer chainId;
     private Integer storeId;
     private Double taxRate;
+    private Integer perWeightFlagIndex;
+    private Integer taxableFlagIndex;
 
     public Integer getChainId() {
         return chainId;
@@ -46,5 +49,19 @@ public class ConfigProperties {
         this.fixedWidthInputItemDescriptors = fixedWidthInputItemDescriptors;
     }
 
-    private List<DefaultFixedWidthInputItemDescriptor> fixedWidthInputItemDescriptors;
+    public Integer getPerWeightFlagIndex() {
+        return perWeightFlagIndex;
+    }
+
+    public void setPerWeightFlagIndex(Integer perWeightFlagIndex) {
+        this.perWeightFlagIndex = perWeightFlagIndex;
+    }
+
+    public Integer getTaxableFlagIndex() {
+        return taxableFlagIndex;
+    }
+
+    public void setTaxableFlagIndex(Integer taxableFlagIndex) {
+        this.taxableFlagIndex = taxableFlagIndex;
+    }
 }

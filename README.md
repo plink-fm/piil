@@ -16,7 +16,7 @@ The library is implemented as a processing chain that provides several plugin po
 
 The following figure depicts the processing pipeline.
 
-![piil Processing Pipeline](https://github.com/plink-fm/piil/blob/master/ProcessingPipeline.PNG?raw=true)
+![piil Processing Pipeline](https://github.com/plink-fm/piil/blob/master/ProcessingPipelinev2.PNG?raw=true)
 
 The processing pipeline is defined as a set of interfaces, for which default implementations are provided (including a fixed-width input item reader).  The handlers provide the "grocery chain-specific" business logic for performing calculations and formatting (e.g. `ChainXFooHandler`). 
 
@@ -28,6 +28,8 @@ The processing pipeline is defined as a set of interfaces, for which default imp
 This service is implemented as a Spring Boot application, and may be invoked either via command line or an HTTP endpoint.
 
 #### Running the piil application
+
+Requirements:  Java 11
 
 To run the application, download the [PiilPackage.zip](https://github.com/plink-fm/piil/suites/2450896733/artifacts/52543565), unzip, and run the jar file:  
 `java -jar piil-0.0.1-SNAPSHOT.jar` 

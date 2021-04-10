@@ -1,5 +1,6 @@
 package com.plink.swfsys.piil.chain_x.handler;
 
+import com.plink.swfsys.piil.chain_x.data.ChainXInputSpecification;
 import com.plink.swfsys.piil.service.InputItemHandler;
 import com.plink.swfsys.piil.service.common.data.field.StringField;
 import com.plink.swfsys.piil.service.common.data.DefaultProductRecord;
@@ -11,14 +12,14 @@ public class ChainXTaxHandler implements InputItemHandler {
 
     @Override
     public void handleItem(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord) {
-        setTaxRateInner(inputItem, productRecord, inputSpecification.getTaxRate());
+        setTaxRateInner(inputSpecification, inputItem, productRecord, inputSpecification.getTaxRate());
     }
 
-    protected void setTaxRateInner(InputItem inputItem, ProductRecord productRecord, Double globalTaxRate) {
+    protected void setTaxRateInner(InputSpecification inputSpecification, InputItem inputItem, ProductRecord productRecord, Double globalTaxRate) {
         final String flags = ((StringField) inputItem.getField("Flags")).getData();
 
-        // TODO:  source index 5 from the InputSpecification
-        final String flag = String.valueOf(flags.charAt(5 - 1));
+        // TODO: push flag indices down into flag item descriptors
+        final String flag = String.valueOf(flags.charAt(((ChainXInputSpecification) inputSpecification).getTaxableFlagIndex() - 1));
 
         boolean isTaxable = flag.equals("Y");
 

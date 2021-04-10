@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +46,15 @@ public class ProductInfoIngestionLibraryServiceTest {
         assertEquals(productRecord.getRegularDisplayPrice(), "2 for $13.00");
         assertEquals(productRecord.getTaxRate(), "0.07775");
 
+    }
+
+    @Test
+    void testProcessStore_empty_input_success() {
+        List<String> inputList = new ArrayList<>();
+        inputList.add("foo");
+
+        List<ProductRecord> productRecords = productInfoIngestionLibraryService.processStore(inputList);
+        assertEquals(0, productRecords.size());
     }
 
 }

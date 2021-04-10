@@ -3,6 +3,10 @@ chainId: 321
 storeId: 5432
 taxRate: 0.07775
 
+# Flag indices - TODO: push down into flag item descriptors
+perWeightFlagIndex: 3
+taxableFlagIndex: 5
+
 fixedWidthInputItemDescriptors:
   -
     start: 1
