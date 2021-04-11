@@ -4,13 +4,13 @@ This service provides processing of input data for the purpose of generating `Pr
 
 
 
-###### Build Status
+### Build Status
 <!-- ![Appveyor build status!](https://ci.appveyor.com/api/projects/status/github/plink-fm/piil) --> 
 ![GitHub build action workflow](https://github.com/plink-fm/piil/actions/workflows/javaci.yml/badge.svg)
 
 
 
-#### Architecture
+### Architecture
 
 The library is implemented as a processing chain that provides several plugin points for data parsing, custom logic, and parceling the output `ProductRecord` to multiple destination services (e.g. persistence, search indexer).
 
@@ -20,16 +20,20 @@ The following figure depicts the processing pipeline.
 
 The processing pipeline is defined as a set of interfaces, for which default implementations are provided (including a fixed-width input item reader).  The handlers provide the "grocery chain-specific" business logic for performing calculations and formatting (e.g. `ChainXFooHandler`). 
 
-#### Packages and classes of interest
+### Packages and classes of interest
  - the `com.plink.swfsys.piil.service` package root contains the common code (and data) structure and default handlers
  - `com.plink.swfsys.piil.chain_x.handler` contains 'Chain X' specific handlers for calculation and formatting
  - the `ProductInfoIngestionLibraryService` class provides the primary entry point for input item data processing, including overloads for custom extensions
 
-This service is implemented as a Spring Boot application, and may be invoked either via command line or an HTTP endpoint.
 
-#### Running the piil application
 
-Requirements:  Java 11
+### Running the piil application
+
+ - Download the [latest release](https://github.com/plink-fm/piil/releases/latest/download/package.zip)
+
+ - This service is implemented as a Spring Boot application, and may be invoked either via command line or an HTTP endpoint.
+
+ - Requires Java 11
 
 To run the application, download the [PiilPackage.zip](https://github.com/plink-fm/piil/suites/2450896733/artifacts/52543565), unzip, and run the jar file:  
 `java -jar piil-0.0.1-SNAPSHOT.jar` 
@@ -47,7 +51,7 @@ To run the application, download the [PiilPackage.zip](https://github.com/plink-
 
  - (Optional) pull down source and run tests, e.g. `ProductInfoIngestionLibraryServiceTest`
 
-#### Future Enhancements
+### Future Enhancements
 
  - `ProductRecord` persistence
  - add parameterized `InputSpecification`
