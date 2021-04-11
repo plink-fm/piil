@@ -29,13 +29,13 @@ The processing pipeline is defined as a set of interfaces, for which default imp
 
 ### Running the piil application
 
- - Download the [latest release](https://github.com/plink-fm/piil/releases/latest/download/package.zip)
+ - Download the [release jar](https://github.com/plink-fm/piil/releases/tag/v0.0.1-SNAPSHOT)
 
  - This service is implemented as a Spring Boot application, and may be invoked either via command line or an HTTP endpoint.
 
  - Requires Java 11
 
-To run the application, download the [PiilPackage.zip](https://github.com/plink-fm/piil/suites/2450896733/artifacts/52543565), unzip, and run the jar file:  
+To run the application, run the jar file:  
 `java -jar piil-0.0.1-SNAPSHOT.jar` 
 
  - The application will bind to port 8080 by default.  
